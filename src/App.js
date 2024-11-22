@@ -6,27 +6,40 @@ import RegistBorrowBook from './NguoiDung/regist.jsx';
 import HistoryBookBorrow from './NguoiDung/history.jsx';
 import BorrowBook from './NguoiDung/borrow.jsx';
 import React, { useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import MessageReceive from './NguoiDung/message.jsx';
-import Notification from './NguoiDung/notify.jsx';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import InfoUser from './NguoiDung/info.jsx';
+
+function Layout() {
+  const location = useLocation();
+
+  // Các route cần ẩn Navbar
+  const hideNavbarRoutes = ["/login", "/logout"];
+
+  const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
+
+  return (
+    <>
+      {shouldShowNavbar && <LeftNavbar />}
+      {shouldShowNavbar && <TopNavbar />}
+      {shouldShowNavbar && <HomepageUser />}
+      <Routes>
+        <Route path="/login" element={<LoginInterface />} />
+        <Route path="/homepage" element={<HomepageUser />} />
+        <Route path="/regist" element={<RegistBorrowBook />} />
+        <Route path="/history" element={<HistoryBookBorrow />} />
+        <Route path="/borrow" element={<BorrowBook />} />
+        <Route path="/information" element={<InfoUser />} />
+        <Route path="/logout" element={<LoginInterface />} />
+      </Routes>
+    </>
+  );
+}
 
 function App() {
   return (
-    <>
-      {/* <InfoUser/> */}
-      <Router>
-        <LeftNavbar />
-        <TopNavbar/>
-        <Routes>
-          <Route path="homepage" element={<HomepageUser />} />
-          <Route path="regist" element={<RegistBorrowBook />} />
-          <Route path="history" element={<HistoryBookBorrow />} />
-          <Route path="borrow" element={<BorrowBook />} />
-          <Route path='information' element={<InfoUser/>}/>
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <Layout />
+    </Router>
   );
 }
 

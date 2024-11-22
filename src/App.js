@@ -19,6 +19,7 @@ function Layout() {
 
   return (
     <>
+      <LoginInterface/>
       {shouldShowNavbar && <LeftNavbar />}
       {shouldShowNavbar && <TopNavbar />}
       {shouldShowNavbar && <HomepageUser />}

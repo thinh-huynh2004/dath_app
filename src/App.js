@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import LoginInterface from './NguoiDung/login.jsx';
+import LeftNavbar from './NguoiDung/leftNav.jsx';
+import TopNavbar from './NguoiDung/topNav.jsx';
+import HomepageUser from './NguoiDung/homepage.jsx';
+import RegistBorrowBook from './NguoiDung/regist.jsx';
+import HistoryBookBorrow from './NguoiDung/history.jsx';
+import BorrowBook from './NguoiDung/borrow.jsx';
+import React, { useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import MessageReceive from './NguoiDung/message.jsx';
+import Notification from './NguoiDung/notify.jsx';
+import InfoUser from './NguoiDung/info.jsx';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <InfoUser/> */}
+      <Router>
+        <LeftNavbar />
+        <TopNavbar/>
+        <Routes>
+          <Route path="homepage" element={<HomepageUser />} />
+          <Route path="regist" element={<RegistBorrowBook />} />
+          <Route path="history" element={<HistoryBookBorrow />} />
+          <Route path="borrow" element={<BorrowBook />} />
+          <Route path='information' element={<InfoUser/>}/>
+        </Routes>
+      </Router>
+    </>
   );
 }
 
